@@ -48,6 +48,11 @@ app.use('/api/users', userRoutes);
 app.use('/api/categories', categoryRoutes);
 
 
+// Root route — satisfies Render health checks
+app.get('/', (req, res) => {
+  res.json({ status: 'ok', message: 'Inventory API is running' });
+});
+
 app.get('/api/health', async (req, res) => {
   try {
     const result = await pool.query('SELECT NOW() as time');
